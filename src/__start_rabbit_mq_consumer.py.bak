@@ -5,9 +5,9 @@ import os, sys, json, inspect, uuid, argparse, datetime, logging, copy
 from time import sleep
 
 # Local Imports
-from .logger                     import Logger
-from .utils                      import *
-from .rabbit_message_consumer    import RabbitMessageConsumer
+from logger                     import Logger
+from utils                      import *
+from rabbit_message_consumer    import RabbitMessageConsumer
 
 
 #####################################################################

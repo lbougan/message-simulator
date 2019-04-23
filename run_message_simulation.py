@@ -5,9 +5,9 @@ import os, sys, json, inspect, uuid, argparse, datetime, logging, copy
 from time import sleep
 
 # Local Imports
-from src.logger             import Logger
-from src.utils              import *
-from src.message_simulator  import MessageSimulator
+from .src.logger             import Logger
+from .src.utils              import *
+from .src.message_simulator  import MessageSimulator
 
 
 #####################################################################

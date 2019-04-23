@@ -108,7 +108,7 @@ class RabbitMessagePublisher:
             self.m_log.log(full_msg, level)
 
         else:
-            print "There is no logger for message(" + msg + ")"
+            print("There is no logger for message(" + msg + ")")
 
         return None
     # end of lg
@@ -168,7 +168,7 @@ class RabbitMessagePublisher:
             # Setup the Channel
             results             = build_dict("SUCCESS", "Connected", {})
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to establish connection with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Not Connected"
@@ -207,7 +207,7 @@ class RabbitMessagePublisher:
             results             = build_dict("SUCCESS", "Disconnected", {})
             self.m_status       = "Not Connected"
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to establish connection with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Not Connected"
@@ -584,12 +584,12 @@ class RabbitMessagePublisher:
                                                 })
 
                     blocking_ch.close()
-                except Exception,h:
+                except Exception as h:
                     self.lg("Exchange(" + str(exchange_node["Name"]) + ") Exists Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Exchange", {})
                 # end of try/ex for getting the exchange
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run get_exchange_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -643,12 +643,12 @@ class RabbitMessagePublisher:
                                                 })
 
                     blocking_ch.close()
-                except Exception,h:
+                except Exception as h:
                     self.lg("Exchange(" + str(queue_node["Name"]) + ") Exists Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Exchange", {})
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run delete_exchange with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -764,12 +764,12 @@ class RabbitMessagePublisher:
                                                 })
 
                     blocking_ch.close()
-                except Exception,h:
+                except Exception as h:
                     self.lg("Queue(" + str(queue_node["Name"]) + ") Exists Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Queue", {})
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run get_queue_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -824,12 +824,12 @@ class RabbitMessagePublisher:
                                                 })
 
                     blocking_ch.close()
-                except Exception,h:
+                except Exception as h:
                     self.lg("Queue(" + str(queue_node["Name"]) + ") Exists Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Queue", {})
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run delete_queue with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -887,7 +887,7 @@ class RabbitMessagePublisher:
             self.lg("Template(" + str(self.m_cur_message_template) + ") Done(" + str(percent_done) + ") Received(" + str(confirmation_type) + ") Delivery(" + str(method_frame.method.delivery_tag) + "/" + str(self.m_number_to_send) + "))", 6)
 
         if int(self.m_message_number) % 5000 == 0:
-            print   "Template(" + str(self.m_cur_message_template) + ") Done(" + str(percent_done) + ") Received(" + str(confirmation_type) + ") Delivery(" + str(method_frame.method.delivery_tag) + "/" + str(self.m_number_to_send) + ")"
+            print("Template(" + str(self.m_cur_message_template) + ") Done(" + str(percent_done) + ") Received(" + str(confirmation_type) + ") Delivery(" + str(method_frame.method.delivery_tag) + "/" + str(self.m_number_to_send) + ")")
 
         if confirmation_type == "ack":
             self.m_acked += 1
@@ -1075,7 +1075,7 @@ class RabbitMessagePublisher:
 
             # if the current count is over the template message set amount
             if self.m_debug:
-                print "Sent Template(" + str(self.m_cur_message_template) + ") Count(" + str(self.m_cur_count) + ") >= Number(" + str(self.m_cur_message["NumberToSend"]) + ")"
+                print("Sent Template(" + str(self.m_cur_message_template) + ") Count(" + str(self.m_cur_count) + ") >= Number(" + str(self.m_cur_message["NumberToSend"]) + ")")
 
             if self.m_cur_count >= int(self.m_cur_message["NumberToSend"]):
 
@@ -1117,7 +1117,7 @@ class RabbitMessagePublisher:
             try:
                 properties              = self.convert_cur_message_dict_to_basic_properties(self.m_cur_message, self.m_message_number, cur_message_id=None, cur_app_id=None)
 
-            except Exception,e:
+            except Exception as e:
                 properties              = None
                 err_msg                 = "Failed to Convert(" + str(self.m_message_number) + ") Message(" + str(self.m_cur_message) + ") with Ex(" + str(e) + ")"
                 self.elg(err_msg, True)
@@ -1171,7 +1171,7 @@ class RabbitMessagePublisher:
             if self.m_cur_count < self.m_number_to_send:
                 self.continue_sending_batch()
 
-        except Exception,k:
+        except Exception as k:
             err_msg         = "Failed Send AMQP Message Template Number(" + str(self.m_message_number) + ") Message(" + str(self.m_cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results         = build_dict("FAILED", str(err_msg), {
@@ -1344,7 +1344,7 @@ class RabbitMessagePublisher:
                 results             = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
             # end of if/else
 
-        except Exception,k:
+        except Exception as k:
             err_msg     = "Failed Stop Broker Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results     = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
@@ -1489,7 +1489,7 @@ class RabbitMessagePublisher:
                 results             = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
             # end of if/else
 
-        except Exception,k:
+        except Exception as k:
             err_msg     = "Failed Start Broker Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results     = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
@@ -1561,7 +1561,7 @@ class RabbitMessagePublisher:
                 self.elg(err_msg, True)
                 results     = build_dict("FAILED", str(err_msg), {})
 
-        except Exception,k:
+        except Exception as k:
             err_msg         = "Failed Validating SSH Credentials Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results         = build_dict("FAILED", str(err_msg), {})
@@ -1627,7 +1627,7 @@ class RabbitMessagePublisher:
                 self.elg(err_msg, True)
                 results     = build_dict("FAILED", str(err_msg), {})
 
-        except Exception,k:
+        except Exception as k:
             err_msg         = "Failed Validating Docker Remote Execution Credentials Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results         = build_dict("FAILED", str(err_msg), {})
@@ -1798,7 +1798,7 @@ class RabbitMessagePublisher:
                 results             = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
             # end of if/else
 
-        except Exception,k:
+        except Exception as k:
             err_msg     = "Failed Add Network Latency Event Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results     = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
@@ -1967,7 +1967,7 @@ class RabbitMessagePublisher:
                 results             = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
             # end of if/else
 
-        except Exception,k:
+        except Exception as k:
             err_msg     = "Failed Remove Network Latency Events Number(" + str(self.m_message_number) + ") Message(" + str(cur_message) + ") with Ex(" + str(k) + ")"
             self.elg(err_msg, True)
             results     = build_dict("FAILED", str(err_msg), { "Nodes" : [], "Errors" : [] })
@@ -2065,12 +2065,12 @@ class RabbitMessagePublisher:
 
                     # build all the exchanges
 
-                except Exception,h:
+                except Exception as h:
                     self.lg("Get All Exchanges Failed with Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Exchanges", { "Exchanges" : [] })
                 # end of try/ex for getting the exchanges
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run return_all_exchange_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -2174,12 +2174,12 @@ class RabbitMessagePublisher:
 
                     # build all the queues
 
-                except Exception,h:
+                except Exception as h:
                     self.lg("Get All Queues Failed with Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Queues", { "Queues" : [] })
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run return_all_queue_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -2246,12 +2246,12 @@ class RabbitMessagePublisher:
 
                     # build all the bindings
 
-                except Exception,h:
+                except Exception as h:
                     self.lg("Get All Bindings Failed with Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Bindings", { "Bindings" : [] })
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run return_all_binding_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -2337,12 +2337,12 @@ class RabbitMessagePublisher:
                         cur_row         += 1
                     # build all the bindings
 
-                except Exception,h:
+                except Exception as h:
                     self.lg("Get All Nodes Failed with Ex(" + str(h) + ")", 6)
                     results     = build_dict("SUCCESS", "No Nodes", { "Nodes" : [] })
                 # end of try/ex for getting the queue
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to run return_all_cluster_node_details with Ex(" + str(k) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_status       = "Failed"
@@ -2475,18 +2475,18 @@ class RabbitMessagePublisher:
             if "StopConsumers" in self.m_consumer_config:
 
                 if self.m_consumer_config["StopConsumers"] == "At End":
-                    print "Stopping Consumers(" + str(len(self.m_consumers)) + ")"
+                    print("Stopping Consumers(" + str(len(self.m_consumers)) + ")")
 
                     for consumer in self.m_consumers:
 
                         if consumer["PID"] != "":
-                            print "\tStopping Consumer(" + str(consumer["PID"]) + ")"
+                            print("\tStopping Consumer(" + str(consumer["PID"]) + ")")
                             stop_command        = "/bin/kill -9 " + str(consumer["PID"])
                             os.system(stop_command)
 
                     os.system("kill -9 `ps auwwx | grep python | grep mq_consumer | grep rabbit | awk '{print $2}'`")
                 else:
-                    print "TODO Add support for sending a 'stop message'"
+                    print("TODO Add support for sending a 'stop message'")
             else:
 
                 self.lg("Leaving Consumers(" + str(len(self.m_consumers)) + ") Running", 6)
@@ -2526,7 +2526,7 @@ class RabbitMessagePublisher:
 
                         remote_com  = cur_message["Command"]
                         log_line    = "Starting Worker(" + str(cur_worker) + ") with Command(" + str(remote_com) + ")"
-                        print log_line
+                        print(log_line)
 
                         proc        = subprocess.Popen(remote_com, shell=True, stdout=subprocess.PIPE)
                         pids.append({
@@ -2534,7 +2534,7 @@ class RabbitMessagePublisher:
                                         "Command"   : str(remote_com)
                                     })
 
-                    except Exception,h:
+                    except Exception as h:
                         self.lg("Start Worker Publisher Failed with Ex(" + str(h) + ")", 6)
                         results     = build_dict("SUCCESS", "No Exchanges", { "Exchanges" : [] })
                     # end of try/ex for getting the exchanges
@@ -2544,7 +2544,7 @@ class RabbitMessagePublisher:
 
                 results             = build_dict("SUCCESS", "Started Workers", { "PIDs" : pids })
 
-        except Exception,k:
+        except Exception as k:
             err_msg             = "Failed to perform start_worker_publisher with Ex(" + str(k) + ")"
             self.elg("ERROR: " + str(err_msg), True)
             self.m_status       = "Failed"

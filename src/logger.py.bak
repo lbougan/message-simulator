@@ -14,9 +14,9 @@ class Logger:
 
         try:
             handler = logging.handlers.SysLogHandler(address=log_file)
-        except Exception as ex:
+        except Exception, ex:
 
-            print("\n\n\nFailed to initialize syslog for file(" + log_file + ") with Exception(" + str(ex) + ").  Exiting...\n\n")
+            print "\n\n\nFailed to initialize syslog for file(" + log_file + ") with Exception(" + str(ex) + ").  Exiting...\n\n"
             sys.exit(-1)
             return
 
@@ -38,31 +38,31 @@ class Logger:
 
     
     def header(self, string_to_log):
-        print(self.m_HEADER + string_to_log + self.m_ENDC)
+        print self.m_HEADER + string_to_log + self.m_ENDC
         return None
     # end of header
 
 
     def blue(self, string_to_log):
-        print(self.m_OKBLUE + string_to_log + self.m_ENDC)
+        print self.m_OKBLUE + string_to_log + self.m_ENDC
         return None
     # end of blue
 
 
     def green(self, string_to_log):
-        print(self.m_OKGREEN + string_to_log + self.m_ENDC)
+        print self.m_OKGREEN + string_to_log + self.m_ENDC
         return None
     # end of green
 
 
     def warning(self, string_to_log):
-        print(self.m_WARNING + string_to_log + self.m_ENDC)
+        print self.m_WARNING + string_to_log + self.m_ENDC
         return None
     # end of warning
 
 
     def fail(self, string_to_log):
-        print(self.m_FAIL + string_to_log + self.m_ENDC)
+        print self.m_FAIL + string_to_log + self.m_ENDC
         return None
     # end of fail
 

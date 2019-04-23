@@ -45,7 +45,7 @@ class MessageSimulator:
             self.m_log.log(full_msg, level)
 
         else:
-            print("There is no logger for message(" + msg + ")")
+            print "There is no logger for message(" + msg + ")"
 
         return None
     # end of lg
@@ -72,7 +72,7 @@ class MessageSimulator:
             if self.m_broker_app is not None:
                 self.m_broker_app.connect()
 
-        except Exception as e:
+        except Exception,e:
             err_msg             = "Failed to Connect with Ex(" + str(e) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_broker_app   = None
@@ -88,7 +88,7 @@ class MessageSimulator:
             if self.m_broker_app is not None:
                 self.m_broker_app.disconnect()
 
-        except Exception as e:
+        except Exception,e:
             err_msg             = "Failed to Disconnect with Ex(" + str(e) + ")"
             self.lg("ERROR: " + str(err_msg), 0)
             self.m_broker_app   = None
